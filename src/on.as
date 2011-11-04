@@ -9,10 +9,10 @@ import flash.events.IEventDispatcher;
  * <pre>on(yourDispatcher).click = clickListener;</pre>
  * <pre>on(yourDispatcher).click += clickListener2;</pre>
  *
- * more docs soon. For now, you can see unit tests.
+ * Complete tutorial available at: http://filimanjaro.com/fingers
  *
  * @param obj any EventDispatcher
- * @return OnObject, a wrapper for your dispatcher;
+ * @return Finger, a wrapper for your dispatcher;
  */
 public function on(obj:IEventDispatcher):Finger
 {

@@ -46,7 +46,8 @@ public dynamic class Finger extends Proxy
             throw new IllegalOperationError("Max 16 functions can be added at once using 'on' syntax");
         operatedFunctions.push(this);
         return 1 << ((operatedFunctions.length - 1) * 2);
-    }
+    };
+
     private static const operatedFunctions:Array = [];
 
     flash_proxy override function getProperty(name:*):*
@@ -136,6 +137,8 @@ public dynamic class Finger extends Proxy
 
     public function getListenersNum(eventName:String):int
     {
+        Function.prototype.valueOf = defaultValueOf;
+
         var listeners:Dictionary = events[eventName];
         var num:int = 0;
         for (var k:* in listeners)
@@ -147,6 +150,8 @@ public dynamic class Finger extends Proxy
 
     public function getAllListenersNum():int
     {
+        Function.prototype.valueOf = defaultValueOf;
+
         var num:int = 0;
         for (var eventName:String in events)
         {
@@ -179,7 +184,7 @@ public dynamic class Finger extends Proxy
             var wrapper:Function = function(e:Event):void
             {
                 listener()
-            }
+            };
             target.addEventListener(name, wrapper);
             events[name][listener] = wrapper;
         }
