@@ -1,5 +1,6 @@
-[http://filimanjaro.com/fingers/][Tutorial & official project page]
+[Tutorial & official project page][http://filimanjaro.com/fingers/]
 
 Fingers helps you to manage your events, e.g.:
-`on(yourButton).click += yourListener`
-__(please see above tutorial for more info)__
+`on(yourButton).click += yourListener;`
+
+_(please see above tutorial for more info)_
