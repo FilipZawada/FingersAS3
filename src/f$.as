@@ -1,13 +1,42 @@
 package
 {
-public function f$(func:Function):Function
+public function f$(funcOrInst:Object):*
 {
-    return function(...args):*
+    if(funcOrInst is Function)
     {
-        return function(...dontCare):*
+        return function(...args):Function
         {
-            func.apply(null, args);
+            return function():void
+            {
+                funcOrInst.apply(null, args);
+            }
         }
+    } else
+    {
+        return new FreezerProxy(funcOrInst);
     }
 }
+}
+
+import flash.utils.Proxy;
+import flash.utils.flash_proxy;
+
+use namespace flash_proxy;
+
+internal class FreezerProxy extends Proxy
+{
+    internal var obj:Object;
+
+    public function FreezerProxy(obj:Object)
+    {
+        this.obj = obj;
+    }
+
+
+    flash_proxy override function callProperty(name:*, ... rest):*
+    {
+        return function():void {
+            obj[name] = rest[0];
+        }
+    }
 }
