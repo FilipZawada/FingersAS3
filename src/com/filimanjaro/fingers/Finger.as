@@ -201,8 +201,9 @@ public dynamic class Finger extends Proxy
         }
 
         // optimization found here: http://gskinner.com/blog/archives/2008/12/making_dispatch.html
-        if (target.hasEventListener(name))
-            target.dispatchEvent(construct(EventClass, name, rest));
+        var event:Event = construct(EventClass, name, rest);
+        if (target.hasEventListener(name) || event.bubbles)
+            target.dispatchEvent(event);
     }
 }
 

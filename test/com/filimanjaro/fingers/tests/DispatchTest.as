@@ -10,6 +10,7 @@ com.filimanjaro.fingers.tests
 {
 import com.filimanjaro.fingers.OnStatementTestBase;
 
+import flash.display.Sprite;
 import flash.events.KeyboardEvent;
 import flash.events.MouseEvent;
 import flash.ui.Keyboard;
@@ -69,6 +70,20 @@ public class DispatchTest extends OnStatementTestBase
         assertThat(caughtEvent, notNullValue());
         assertThat(caughtEvent.bubbles, isTrue());
         assertThat(caughtEvent.cancelable, isTrue());
+    }
+    
+    [Test]
+    public function quick_dispatch_is_bubbling_test():void
+    {
+        clear();
+        var parent:Sprite = new Sprite();
+        var child:Sprite = new Sprite();
+        parent.addChild(child);
+        
+        on(parent).click += succeedingHandler;
+        on(child).click(MouseEvent); // MouseEvent bubbles by default
+        
+        assertThat(caughtEvent, notNullValue());
     }
 
 }
